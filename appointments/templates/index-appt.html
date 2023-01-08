@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Book an appointment</h1>
+<div class="row">
+    {% for doctor in Doctors%}
+    <form action="{% url 'appointments:book' %}" method="post">
+        {% csrf_token %}
+    <label for="doc">{{doctor.first_name}} {{doctor.last_name}}</label>
+        <input type="radio" id="doc" name="doctor" value="{{doctor}}">
+    {% endfor %}
+
+    <input type="date" name="day" placeholder="day" required>
+    <input type="text" name="service" required>
+    <label value="Choose time">Choose time</label>
+    <select name="time" class="form-control" required>
+        <option value="3 PM">3 PM</option>
+        <option value="4 PM">4 PM</option>
+        <option value="5 PM">5 PM</option>
+        <option value="6 PM">6 PM</option>
+        <option value="7 PM">7 PM</option>
+    </select>
+    <input type="submit" value="Submit"> Submit</input>
+    </form>
+</div>
+{% endblock %}

@@ -1,8 +1,9 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<h1>Your appointment: {{request.user.first_name}} {{request.user.last_name}}</h1>
+<h1><strong>Your appointment:</strong> {{request.user.first_name}} {{request.user.last_name}}</h1>
 <h2>{{service}}</h2>
+<h2>dr {{doctor}}</h2>
 <p> {{day}} - {{time}} </p>
 
 {% endblock %}

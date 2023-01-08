@@ -14,13 +14,23 @@
     <input type="text" name="service" required>
     <label value="Choose time">Choose time</label>
     <select name="time" class="form-control" required>
+        <option value="1:30 PM">1:30 PM</option>
+        <option value="2 PM">2 PM</option>
+        <option value="2:30 PM">2:30 PM</option>
         <option value="3 PM">3 PM</option>
+        <option value="3:30 PM">3:30 PM</option>
         <option value="4 PM">4 PM</option>
+        <option value="4:30 PM">4:30 PM</option>
         <option value="5 PM">5 PM</option>
+        <option value="5:30 PM">5:30 PM</option>
         <option value="6 PM">6 PM</option>
+        <option value="6:30 PM">6:30 PM</option>
         <option value="7 PM">7 PM</option>
     </select>
     <input type="submit" value="Submit"> Submit</input>
     </form>
 </div>
+{% for message in messages %}
+<p id="messages">{{message}}</p>
+{% endfor %}
 {% endblock %}

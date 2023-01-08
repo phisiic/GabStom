@@ -2,6 +2,7 @@ from django.db import models
 from datetime import datetime
 from accounts.models import User
 from cennik.models import Zabieg
+from django.core.exceptions import ValidationError
 
 
 TIME_CHOICES = (
@@ -25,6 +26,12 @@ class Appointment(models.Model):
     day = models.DateField(default=datetime.now)
     time = models.CharField(max_length=10, choices=TIME_CHOICES, default="3 PM")
     time_ordered = models.DateTimeField(default=datetime.now, blank=True)
+
+    def clean(self, *args, **kwargs):
+        super(Appointment, self).clean(*args, **kwargs)
+
+        if self.time < datetime.now():
+            raise ValidationError('Nieprawidłowa data wizyty.')
 
     def __str__(self):
         return f"{self.user.first_name} {self.user.last_name} | {self.day} | {self.time}"

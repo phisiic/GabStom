@@ -5,6 +5,7 @@ from django.contrib.auth.decorators import login_required
 from .models import Appointment
 from accounts.models import User
 from django.contrib import messages
+from django.core.mail import send_mail
 
 @login_required(login_url='accounts:login')
 def index(request):
@@ -31,6 +32,16 @@ def book_view(request):
         else:
             appt = Appointment(user=request.user, service=service, day=day, time=time, doctor=doctor)
             appt.save()
+            send_mail(
+                "Wizyta dnia " + day,
+                "Dziękujemy " + request.user.first_name + " za rejestracje wizyty!\n" +
+                service + " w dniu " + day + " o " + time + "\n" +
+                "dr " + doctor + "\n"
+                "Do zobaczenia!\n"
+                "Gabinet Stomatologiczny MediDent\n",
+                'gabinetmeddent@gmail.com',
+                [request.user.email],
+                fail_silently=False)
             return render(request, 'successful-appt.html', {'day': day, 'time': time, 'service': service, 'doctor': doctor, 'Doctors': doctors})
     else:
         return render(request, 'index-appt.html')

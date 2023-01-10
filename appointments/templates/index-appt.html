@@ -6,12 +6,18 @@
     {% for doctor in Doctors%}
     <form action="{% url 'appointments:book' %}" method="post">
         {% csrf_token %}
-    <label for="doc">{{doctor.first_name}} {{doctor.last_name}}</label>
+    <div class="row">
+        <label for="doc">{{doctor.first_name}} {{doctor.last_name}}</label>
         <input type="radio" id="doc" name="doctor" value="{{doctor}}">
+    </div>
     {% endfor %}
 
-    <input type="date" name="day" placeholder="day" required>
-    <input type="text" name="service" required>
+    <div class="row">
+        <input type="date" name="day" placeholder="day" required>
+    </div>
+    <div class="row">
+        <input type="text" name="service" required>
+    </div>
     <label value="Choose time">Choose time</label>
     <select name="time" class="form-control" required>
         <option value="1:30 PM">1:30 PM</option>

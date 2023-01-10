@@ -7,4 +7,7 @@ from django.contrib.auth.decorators import login_required
 
 @login_required(login_url='accounts:login')
 def index(request):
-    return render(request, 'home.html')
+    return render(request, 'farm/organic-farm-website-template/index.html')
+
+def error_403_view(request):
+    return render(request, 'error403/403-forbidden/src/index.html')

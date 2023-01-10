@@ -6,6 +6,8 @@ from .models import Appointment
 from accounts.models import User
 from django.contrib import messages
 from django.core.mail import send_mail
+from accounts.decorators import staff_only
+
 
 @login_required(login_url='accounts:login')
 def index(request):

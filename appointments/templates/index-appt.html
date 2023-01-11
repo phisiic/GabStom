@@ -8,7 +8,7 @@
         {% csrf_token %}
     <div class="row">
         <label for="doc">{{doctor.first_name}} {{doctor.last_name}}</label>
-        <input type="radio" id="doc" name="doctor" value="{{doctor}}">
+        <input type="radio" id="doc" name="doctor" value="{{doctor}}" required>
     </div>
     {% endfor %}
 

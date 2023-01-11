@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django_extensions',
 
 #   local apps:
     'accounts.apps.AccountsConfig',
@@ -140,3 +141,8 @@ EMAIL_USE_TLS = True
 EMAIL_USE_SSL = False
 EMAIL_HOST_USER = 'gabinetmeddent@gmail.com'
 EMAIL_HOST_PASSWORD = 'molcvuerlflvhbwb'
+
+GRAPH_MODELS = {
+    "all_applications": True,
+    "group_models": True,
+}

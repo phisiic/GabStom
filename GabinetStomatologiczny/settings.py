@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-b6a%j)#k%ub=zbw)6x)8h!on&zq9x858fo6ku*q8+6f9b-+ly@
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'cennik.apps.CennikConfig',
     'homepage',
     'contact',
+    'supplies.apps.SuppliesConfig',
 ]
 
 MIDDLEWARE = [
@@ -111,7 +112,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/4.1/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'pl'
 
 TIME_ZONE = 'UTC'
 

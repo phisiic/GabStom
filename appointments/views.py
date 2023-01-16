@@ -2,7 +2,7 @@ from datetime import datetime
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
-from .models import Appointment
+from .models import Wizyta
 from accounts.models import User
 from django.contrib import messages
 from django.core.mail import send_mail
@@ -24,15 +24,15 @@ def book_view(request):
         service = request.POST['service']
         time = request.POST['time']
 
-        if Appointment.objects.all().filter(day=datetime.strptime(day, "%Y-%m-%d"), time=time, doctor=doctor):
+        if Wizyta.objects.all().filter(day=datetime.strptime(day, "%Y-%m-%d"), time=time, doctor=doctor):
             messages.info(request, 'Niepoprawna data - lekarz zajety')
-            return redirect('appointments:index')
+            return redirect('appointments:book')
 
         if datetime.strptime(day, "%Y-%m-%d") <= datetime.now():
             messages.info(request, 'Niepoprawna data')
-            return redirect('appointments:index')
+            return redirect('appointments:book')
         else:
-            appt = Appointment(user=request.user, service=service, day=day, time=time, doctor=doctor)
+            appt = Wizyta(user=request.user, service=service, day=day, time=time, doctor=doctor)
             appt.save()
             send_mail(
                 "Wizyta dnia " + day,
@@ -40,10 +40,11 @@ def book_view(request):
                 service + " w dniu " + day + " o " + time + "\n" +
                 "dr " + doctor + "\n"
                 "Do zobaczenia!\n"
-                "Gabinet Stomatologiczny MediDent\n",
+                "Gabinet Stomatologiczny MaxiDent\n",
                 'gabinetmeddent@gmail.com',
                 [request.user.email],
                 fail_silently=False)
+            messages.info(request, "Udano się zarezerwować wizytę")
             return render(request, 'successful-appt.html', {'day': day, 'time': time, 'service': service, 'doctor': doctor, 'Doctors': doctors})
     else:
-        return render(request, 'index-appt.html')
+        return render(request, 'bookappt-1.html')

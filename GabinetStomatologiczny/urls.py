@@ -20,8 +20,12 @@ from django.urls import path, include
 urlpatterns = [
     path('home/', include('homepage.urls', namespace="homepage"), name="home"),
     path('admin/', admin.site.urls),
+    path('grappelli/', include('grappelli.urls')),
     path('cennik/', include('cennik.urls', namespace="pricing")),
     path('accounts/', include('accounts.urls', namespace="accounts")),
     path('appointments/', include('appointments.urls', namespace="appointments")),
     path('contact/', include('contact.urls', namespace="contact")),
+    path('supplies/', include('supplies.urls')),
 ]
+
+admin.site.site_header = 'Administracja MaxiDent'

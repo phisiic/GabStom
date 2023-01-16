@@ -21,7 +21,7 @@ def register_view(request):
                 return redirect('accounts:login')
 
         context = {'form': form}
-        return render(request, 'register.html', context)
+        return render(request, 'register-1.html', context)
 
 
 def login_view(request):
@@ -41,7 +41,7 @@ def login_view(request):
                 messages.info(request, 'Błędny adres email lub hasło')
 
         context = {}
-        return render(request, 'login.html', context)
+        return render(request, 'login-1.html', context)
 
 
 @login_required(login_url='accounts:login')

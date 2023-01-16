@@ -1,11 +1,12 @@
 from django.contrib import admin
-from .models import Appointment
+from .models import Wizyta
 from .forms import AppointmentForm
 
 
 class AppointmentAdmin(admin.ModelAdmin):
     add_form = AppointmentForm
-    model = Appointment
+    model = Wizyta
     list_display = ('user', 'doctor', 'day', 'time', 'time_ordered',)
+    list_filter = ('user', 'doctor', 'day', 'time', 'time_ordered',)
 
-admin.site.register(Appointment, AppointmentAdmin)
+admin.site.register(Wizyta, AppointmentAdmin)

@@ -19,19 +19,22 @@ TIME_CHOICES = (
 )
 
 
-class Appointment(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True, related_name='user_article_set')
-    doctor = models.CharField(max_length=50, null=True, blank=True)
-    service = models.CharField(max_length=255, null=True, blank=True)
-    day = models.DateField(default=datetime.now)
-    time = models.CharField(max_length=10, choices=TIME_CHOICES, default="3 PM")
-    time_ordered = models.DateTimeField(default=datetime.now, blank=True)
+class Wizyta(models.Model):
+    user = models.ForeignKey(User, verbose_name="Użytkownik", on_delete=models.CASCADE, null=True, blank=True, related_name='user_article_set')
+    doctor = models.CharField(max_length=50, null=True, blank=True, verbose_name="Lekarz")
+    service = models.CharField(max_length=255, null=True, blank=True, verbose_name="Zabieg")
+    day = models.DateField(default=datetime.now, verbose_name="Data")
+    time = models.CharField(max_length=10, choices=TIME_CHOICES, default="3 PM", verbose_name="Czas")
+    time_ordered = models.DateTimeField(default=datetime.now, blank=True, verbose_name="Data rejestracji")
 
     def clean(self, *args, **kwargs):
-        super(Appointment, self).clean(*args, **kwargs)
+        super(Wizyta, self).clean(*args, **kwargs)
 
-        if self.time < datetime.now():
+        if self.day < datetime.now():
             raise ValidationError('Nieprawidłowa data wizyty.')
 
     def __str__(self):
         return f"{self.user.first_name} {self.user.last_name} | {self.day} | {self.time}"
+
+    class Meta:
+        verbose_name_plural = "Wizyty"

@@ -2,7 +2,7 @@ from django.db import models
 from django.contrib.auth.models import AbstractUser
 from django.utils.translation import gettext_lazy as _
 from django.contrib.auth.base_user import BaseUserManager
-
+from datetime import datetime
 
 class UserQuerySet(models.QuerySet):
     def staff(self):
@@ -48,12 +48,22 @@ class User(AbstractUser):
     first_name = models.CharField(_('first name'), max_length=20)
     last_name = models.CharField(_('last name'), max_length=30)
 
-    objects=UserManager()
+    objects = UserManager()
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['first_name', 'last_name']
 
     def __str__(self):
         return self.first_name + ' ' + self.last_name
+
+
+class DoKontaktu(models.Model):
+    email=models.EmailField(max_length=60)
+    skontaktowano = models.BooleanField(default=False)
+    time_ordered = models.DateTimeField(default=datetime.now, blank=True, verbose_name="Prośba wysłana")
+
+    class Meta:
+        verbose_name = "Do kontaktu"
+        verbose_name_plural = "Użytkownicy do kontaktu"
 
 

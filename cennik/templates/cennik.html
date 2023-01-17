@@ -66,17 +66,31 @@
                         </li>
 
                         <li>
-                            <a href="cennik.html#cennik" class="navbar-link" data-nav-link>Cennik</a>
+                            <a href="{% url 'homepage:homepage' %}#cennik" class="navbar-link" data-nav-link>Cennik</a>
                         </li>
 
+                        {% if user.is_authenticated %}
                         <li>
-                            <a href="./login-1.html" class="navbar-link" data-nav-link>Zaloguj się</a>
+                            <a href="{% url 'accounts:logout' %}" class="navbar-link" data-nav-link>Wyloguj się</a>
                         </li>
+                        {% endif %}
+
+                        {% if not user.is_authenticated %}
+                        <li>
+                            <a href="{% url 'accounts:login' %}" class="navbar-link" data-nav-link>Zaloguj się</a>
+                        </li>
+                        {% endif %}
 
                     </ul>
                 </nav>
 
-                <a href="bookapt.html" class="btn">Zarezerwuj wizytę</a>
+                {% if not user.is_superuser %}
+                <a href="{% url 'appointments:book' %}" class="btn">Zarezerwuj wizytę</a>
+                {% endif %}
+
+                {% if user.is_superuser %}
+                <a href="{% url 'admin:index' %}" class="btn">Panel Administratora</a>
+                {% endif %}
 
                 <button class="nav-toggle-btn" aria-label="Toggle menu" data-nav-toggler>
                     <ion-icon name="menu-sharp" aria-hidden="true" class="menu-icon"></ion-icon>

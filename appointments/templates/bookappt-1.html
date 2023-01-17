@@ -239,6 +239,9 @@
                         <input type="Submit" class="btn">
                     </form>
                 </div>
+                {% for message in messages %}
+					<p style="text-align: center" id="messages">{{message}}</p>
+				{% endfor %}
             </div>
         </div>
     </div>

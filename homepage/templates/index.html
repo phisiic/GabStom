@@ -79,7 +79,13 @@
                     </ul>
                 </nav>
 
+                {% if not user.is_superuser %}
                 <a href="{% url 'appointments:book' %}" class="btn">Zarezerwuj wizytę</a>
+                {% endif %}
+
+                {% if user.is_superuser %}
+                <a href="{% url 'admin:index' %}" class="btn">Panel Administratora</a>
+                {% endif %}
 
                 <button class="nav-toggle-btn" aria-label="Toggle menu" data-nav-toggler>
                     <ion-icon name="menu-sharp" aria-hidden="true" class="menu-icon"></ion-icon>

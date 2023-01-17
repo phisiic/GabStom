@@ -196,6 +196,10 @@
 					</form>
 				</div>
 
+				{% for message in messages %}
+					<p style="text-align: center" id="messages">{{message}}</p>
+				{% endfor %}
+
 				<div class="mt-4">
 					<div class="d-flex justify-content-center links">
 						Nie posiadasz konta? <a href="{% url 'accounts:register' %}" class="ml-2">Zarejestruj się</a>

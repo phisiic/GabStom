@@ -24,27 +24,28 @@ def book_view(request):
         service = request.POST['service']
         time = request.POST['time']
 
+        if datetime.strptime(day, "%Y-%m-%d") <= datetime.now():
+            messages.info(request, 'Niepoprawna data')
+            return redirect('appointments:book')
+
         if Wizyta.objects.all().filter(day=datetime.strptime(day, "%Y-%m-%d"), time=time, doctor=doctor):
             messages.info(request, 'Niepoprawna data - lekarz zajety')
             return redirect('appointments:book')
 
-        if datetime.strptime(day, "%Y-%m-%d") <= datetime.now():
-            messages.info(request, 'Niepoprawna data')
+        if datetime.weekday(datetime.strptime(day, "%Y-%m-%d")) == 5 or datetime.weekday(datetime.strptime(day, "%Y-%m-%d")) == 6:
+            messages.info(request, "Gabinet jest zamknięty w weekendy.")
             return redirect('appointments:book')
+
         else:
             appt = Wizyta(user=request.user, service=service, day=day, time=time, doctor=doctor)
             appt.save()
             send_mail(
                 "Wizyta dnia " + day,
-                "Dziękujemy " + request.user.first_name + " za rejestracje wizyty!\n" +
-                service + " w dniu " + day + " o " + time + "\n" +
-                "dr " + doctor + "\n"
-                "Do zobaczenia!\n"
-                "Gabinet Stomatologiczny MaxiDent\n",
-                'gabinetmeddent@gmail.com',
-                [request.user.email],
-                fail_silently=False)
+                "Dziękujemy " + request.user.first_name + " za rejestracje wizyty!\n" + service + " w dniu " + day + " o " + time + "\n" +
+                "dr " + doctor + "\nDo zobaczenia!\nGabinet Stomatologiczny MaxiDent\n",
+                'gabinetmeddent@gmail.com', [request.user.email], fail_silently=False)
             messages.info(request, "Udano się zarezerwować wizytę")
-            return render(request, 'successful-appt.html', {'day': day, 'time': time, 'service': service, 'doctor': doctor, 'Doctors': doctors})
+            context = {'day': day, 'time': time, 'service': service, 'doctor': doctor, 'Doctors': doctors}
+            return render(request, 'successbooking.html', context)
     else:
         return render(request, 'bookappt-1.html')

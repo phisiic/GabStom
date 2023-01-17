@@ -8,7 +8,7 @@ class Towar(models.Model):
     nazwa = models.CharField(max_length=255)
     maksymalna_ilosc = models.PositiveIntegerField()
     obecna_ilosc = models.PositiveIntegerField()
-    potrzeba_domówić = models.BooleanField(editable=False)
+    potrzeba_domowic = models.BooleanField(editable=False)
 
     def clean(self):
         if self.obecna_ilosc > self.maksymalna_ilosc:
@@ -16,9 +16,9 @@ class Towar(models.Model):
 
     def save(self, *args, **kwargs):
         if self.obecna_ilosc < 0.3*self.maksymalna_ilosc:
-            self.potrzeba_domówić = True
+            self.potrzeba_domowic = True
         else:
-            self.potrzeba_domówić = False
+            self.potrzeba_domowic = False
         super(Towar, self).save(*args, **kwargs)
     class Meta:
         verbose_name_plural = "Towar"

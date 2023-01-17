@@ -46,6 +46,9 @@ INSTALLED_APPS = [
     'homepage',
     'contact',
     'supplies.apps.SuppliesConfig',
+    'finances',
+    'totalsum',
+    'import_export',
 ]
 
 MIDDLEWARE = [

@@ -8,7 +8,7 @@ class Towar(models.Model):
     nazwa = models.CharField(max_length=255)
     maksymalna_ilosc = models.PositiveIntegerField()
     obecna_ilosc = models.PositiveIntegerField()
-    potrzeba_domówić = models.BooleanField()
+    potrzeba_domówić = models.BooleanField(editable=False)
 
     def clean(self):
         if self.obecna_ilosc > self.maksymalna_ilosc:

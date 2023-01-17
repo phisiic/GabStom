@@ -1,0 +1,508 @@
+{% load static %}
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cennik</title>
+
+    <link rel="shortcut icon" href="{% static 'favicon.svg' %}" type="image/svg+xml">
+
+    <link rel="stylesheet" href="{% static 'assets/css/style.css' %}">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&family=Roboto:wght@400;500;600&display=swap"
+        rel="stylesheet">
+</head>
+
+<body id="top">
+
+    <!--#HEADER-->
+
+    <header class="header">
+
+        <div class="header-top">
+            <div class="container">
+
+                <ul class="contact-list">
+
+                    <li class="contact-item">
+                        <ion-icon name="mail-outline"></ion-icon>
+
+                        <a href="mailto:info@example.com" class="contact-link">kontakt@maxident.pl</a>
+                    </li>
+
+                    <li class="contact-item">
+                        <ion-icon name="call-outline"></ion-icon>
+
+                        <a href="tel:+48555155055" class="contact-link">+48 555 155 055</a>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+
+        <div class="header-bottom" data-header>
+            <div class="container">
+
+                <a href="{% url 'homepage:homepage' %}" class="logo">MaxiDent.</a>
+
+                <nav class="navbar container" data-navbar>
+                    <ul class="navbar-list">
+
+                        <li>
+                            <a href="{% url 'homepage:homepage' %}#home" class="navbar-link" data-nav-link>Strona główna</a>
+                        </li>
+
+                        <li>
+                            <a href="{% url 'homepage:homepage' %}#service" class="navbar-link" data-nav-link>Usługi</a>
+                        </li>
+
+                        <li>
+                            <a href="{% url 'homepage:homepage' %}#about" class="navbar-link" data-nav-link>O nas</a>
+                        </li>
+
+                        <li>
+                            <a href="cennik.html#cennik" class="navbar-link" data-nav-link>Cennik</a>
+                        </li>
+
+                        <li>
+                            <a href="./login-1.html" class="navbar-link" data-nav-link>Zaloguj się</a>
+                        </li>
+
+                    </ul>
+                </nav>
+
+                <a href="bookapt.html" class="btn">Zarezerwuj wizytę</a>
+
+                <button class="nav-toggle-btn" aria-label="Toggle menu" data-nav-toggler>
+                    <ion-icon name="menu-sharp" aria-hidden="true" class="menu-icon"></ion-icon>
+                    <ion-icon name="close-sharp" aria-hidden="true" class="close-icon"></ion-icon>
+                </button>
+
+            </div>
+        </div>
+
+    </header>
+    <main>
+
+
+        <!--
+          - #HERO
+        -->
+        <article>
+            <section class="section hero" id="home" style="background-image: url('./assets/images/hero-bg.png')"
+                aria-label="hero">
+                <div class="container">
+
+                    <div class="hero-content">
+
+                        <p class="section-subtitle">Witamy w Maxident</p>
+
+                        <h1 class="h1 hero-title">Profesjonalne usługi dentystyczne</h1>
+
+                        <p class="hero-text">
+                            Drogi kliencie, w naszej klinice świadczymy usługi stomatologiczne w bardzo szerokim
+                            zakresie. Chcesz szybko umówić wizytę? Skontaktujemy się z Tobą!
+                        </p>
+
+                        <form method="post" class="hero-form" action="{% url 'cennik:' %}">
+                            {% csrf_token %}
+                            <input type="email" name="email_address" aria-label="email"
+                                placeholder="Wpisz swój adres E-mail..." required class="email-field">
+
+                            <button type="submit" class="btn" value="Submit">Odezwiemy się już dziś!</button>
+                        </form>
+
+                    </div>
+
+                    <figure class="hero-banner">
+                        <img src="{% static 'assets/images/hero-banner.png' %}" width="587" height="839" alt="hero banner"
+                            class="w-100">
+                    </figure>
+
+                </div>
+            </section>
+            <section class="section price" id="price" aria-label="price">
+                <div class="container">
+
+                    <p id="cennik" class="section-subtitle text-center">Cennik</p>
+
+                    <h2 class="h2 section-title text-center">Co oferujemy</h2>
+
+                    <ul class="price-list">
+
+                        <li>
+                            <div class="price-card">
+
+                                <figure class="card-banner img-holder" style="--width: 1180; --height: 800;">
+                                    <img src="{% static 'assets/images/price-6.jpg' %}" width="1180" height="800" loading="lazy"
+                                        alt="Cennik usług stomatologicznych" class="img-cover">
+                                    <div class="card-badge">
+
+                                        <p>120zł</p>
+
+                                    </div>
+                                </figure>
+
+                                <div class="card-content">
+
+                                    <h3 class="h3">
+                                        <p>Higienizacja</p>
+                                    </h3>
+
+                                    <p class="card-text">
+                                        Zabiegi higienizacyjne rekomendujemy wszystkim pacjentom, ponieważ czynników,
+                                        które mają wpływ na tworzenie się kamienia nazębnego jest sporo.
+                                    </p>
+
+                                    <a href="cennik.html" class="card-link">System ratalny</a>
+
+                                </div>
+
+                            </div>
+                        </li>
+                        <li>
+                            <div class="price-card">
+
+                                <figure class="card-banner img-holder" style="--width: 1180; --height: 800;">
+                                    <img src="{% static 'assets/images/price-5.jpg' %}" width="1180" height="800" loading="lazy"
+                                        alt="Cennik usług stomatologicznych" class="img-cover">
+                                    <div class="card-badge">
+                                        <p>1000zł</p>
+                                    </div>
+                                </figure>
+
+                                <div class="card-content">
+
+                                    <h3 class="h3">
+                                        <p>Protetyka</p>
+                                    </h3>
+
+                                    <p class="card-text">
+                                        Protetyka jest częścią stomatologii, która nie zajmuje się profilaktyką i
+                                        leczeniem zębów, ale wkracza tam, gdzie na zwykłą pomoc dentystyczną jest już za
+                                        późno.
+                                    </p>
+
+                                    <a href="cennik.html" class="card-link">System ratalny</a>
+
+                                </div>
+
+                            </div>
+                        </li>
+                        <li>
+                            <div class="price-card">
+
+                                <figure class="card-banner img-holder" style="--width: 1180; --height: 800;">
+                                    <img src="{% static 'assets/images/price-4.jpg' %}" width="1180" height="800" loading="lazy"
+                                        alt="Cennik usług stomatologicznych" class="img-cover">
+                                    <div class="card-badge">
+                                        <p>400zł</p>
+
+                                    </div>
+                                </figure>
+
+                                <div class="card-content">
+
+                                    <h3 class="h3">
+                                        <p>Leczenie kanałowe</p>
+                                    </h3>
+
+                                    <p class="card-text">
+                                        Leczenie kanałowe to usunięcie zainfekowanej miazgi z zęba i zamknięcie kanałów.
+                                    </p>
+
+                                    <a href="cennik.html" class="card-link">System ratalny</a>
+
+                                </div>
+
+                            </div>
+                        </li>
+                        <li>
+                            <div class="price-card">
+
+                                <figure class="card-banner img-holder" style="--width: 1180; --height: 800;">
+                                    <img src="{% static 'assets/images/price-2.jpg' %}" width="1180" height="800" loading="lazy"
+                                        alt="Cennik usług stomatologicznych" class="img-cover">
+                                    <div class="card-badge">
+
+                                        <p>400zł</p>
+
+                                    </div>
+                                </figure>
+
+                                <div class="card-content">
+
+                                    <h3 class="h3">
+                                        <p>Ekstrakcja zęba</p>
+                                    </h3>
+
+                                    <p class="card-text">
+                                        Konieczność usunięcia zęba może wynikać z wad zgryzu, jednak zdecydowanie
+                                        częściej przyczyną jest zły stan zęba lub przyzębia, które nie nadają się do
+                                        leczenia
+                                    </p>
+
+                                    <a href="cennik.html" class="card-link">System ratalny</a>
+
+                                </div>
+
+                            </div>
+                        </li>
+
+                        <li>
+                            <div class="price-card">
+
+                                <figure class="card-banner img-holder" style="--width: 1180; --height: 800;">
+                                    <img src="{% static 'assets/images/price-3.jpg' %}" width="1180" height="800" loading="lazy"
+                                        alt="Cennik usług stomatologicznych" class="img-cover">
+                                    <div class="card-badge">
+                                        <p>250zł</p>
+                                    </div>
+                                </figure>
+
+                                <div class="card-content">
+
+                                    <h3 class="h3">
+                                        <p>Wypełnianie ubytku</p>
+                                    </h3>
+
+                                    <p class="card-text">
+                                        Wypełnianie ubytków to metoda leczenia zębów uszkodzonych przez próchnicę lub w
+                                        wyniku urazów mechanicznych, pozwala przywrócić prawidłowy kształt zęba oraz
+                                        jego czynność.
+                                    </p>
+
+                                    <a href="cennik.html" class="card-link">System ratalny</a>
+
+                                </div>
+
+                            </div>
+                        </li>
+
+                        <li>
+                            <div class="price-card">
+
+                                <figure class="card-banner img-holder" style="--width: 1180; --height: 800;">
+                                    <img src="{% static 'assets/images/price-1.jpg' %}" width="1180" height="800" loading="lazy"
+                                        alt="Cennik usług stomatologicznych" class="img-cover">
+                                    <div class="card-badge">
+
+                                        <p>50zł</p>
+
+                                    </div>
+
+                                </figure>
+
+                                <div class="card-content">
+
+                                    <h3 class="h3">
+                                        <p>Przegląd jamy ustnej</p>
+                                    </h3>
+
+                                    <p class="card-text">
+                                        Przeglądu jamy ustnej obejmuje stan uzębienia i dziąseł, ocena jakości szkliwa,
+                                        a także stopień osadzania się płytki nazębnej i kamienia.
+                                    </p>
+
+                                    <a href="cennik.html" class="card-link">System ratalny</a>
+
+                                </div>
+
+                            </div>
+                        </li>
+
+                    </ul>
+                    <br><br>
+                    <h3>Podane ceny są cenami minimalnymi, o dokładniejszej ofercie można dowiedzieć się kontaktując z
+                        kliniką</h3>
+
+                </div>
+            </section>
+            <footer class="footer">
+
+                <div class="footer-top section">
+                    <div class="container">
+
+                        <div class="footer-brand">
+
+                            <a href="{% url 'homepage:homepage' %}" class="logo">Maxident.</a>
+
+                            <p class="footer-text">
+                                Zapraszamy do naszego gabinetu. W sprawie oferty indywidualnej prosimy o kontakt mailowy
+                                lub
+                                telefoniczny.
+                            </p>
+
+                            <div class="schedule">
+                                <div class="schedule-icon">
+                                    <ion-icon name="time-outline"></ion-icon>
+                                </div>
+                                <span class="span">
+                                    Poniedziałek <br>11:00 - 18:00<br>
+                                    Wtorek - Piątek <br>
+                                    9:00 - 17:00
+                                </span>
+                            </div>
+
+                        </div>
+
+                        <ul class="footer-list">
+                            <li>
+                                <p class="footer-list-title">Pozostałe linki: </p>
+                            </li>
+                            <li>
+                                <a href="{% url 'homepage:homepage' %}" class="footer-link">
+                                    <ion-icon name="add-outline"></ion-icon>
+                                    <span class="span">Strona główna</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{% url 'homepage:homepage' %}#services" class="footer-link">
+                                    <ion-icon name="add-outline"></ion-icon>
+                                    <span class="span">Usługi</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{% url 'cennik:' %}" class="footer-link">
+                                    <ion-icon name="add-outline"></ion-icon>
+                                    <span class="span">Cennik</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{% url 'homepage:homepage' %}#about" class="footer-link">
+                                    <ion-icon name="add-outline"></ion-icon>
+                                    <span class="span">O nas</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{% url 'accounts:login' %}" class="footer-link">
+                                    <ion-icon name="add-outline"></ion-icon>
+                                    <span class="span">Zaloguj się</span>
+                                </a>
+                            </li>
+                        </ul>
+
+                        <ul class="footer-list">
+
+                            <li>
+                                <p class="footer-list-title">Nasze usługi</p>
+                            </li>
+
+                            <li>
+                                <a href="{% url 'homepage:homepage' %}#kanałowe" class="footer-link">
+                                    <ion-icon name="add-outline"></ion-icon>
+
+                                    <span class="span">Leczenie kanałowe</span>
+                                </a>
+                            </li>
+
+                            <li>
+                                <a href="{% url 'homepage:homepage' %}#ortodontyczne" class="footer-link">
+                                    <ion-icon name="add-outline"></ion-icon>
+
+                                    <span class="span">Leczenie ortodontyczne</span>
+                                </a>
+                            </li>
+
+                            <li>
+                                <a href="{% url 'homepage:homepage' %}#protetyka" class="footer-link">
+                                    <ion-icon name="add-outline"></ion-icon>
+
+                                    <span class="span">Protetyka</span>
+                                </a>
+                            </li>
+
+                            <li>
+                                <a href="{% url 'homepage:homepage' %}#higienizacja" class="footer-link">
+                                    <ion-icon name="add-outline"></ion-icon>
+
+                                    <span class="span">Higienizacja</span>
+                                </a>
+                            </li>
+
+                            <li>
+                                <a href="{% url 'homepage:homepage' %}#kontrola" class="footer-link">
+                                    <ion-icon name="add-outline"></ion-icon>
+
+                                    <span class="span">Kontrola jamy ustnej</span>
+                                </a>
+                            </li>
+
+                            <li>
+                                <a href="{% url 'homepage:homepage' %}#zachowawcza" class="footer-link">
+                                    <ion-icon name="add-outline"></ion-icon>
+
+                                    <span class="span">Stomatologia zachowawcza</span>
+                                </a>
+                            </li>
+
+                        </ul>
+
+                        <ul class="footer-list">
+
+                            <li>
+                                <p class="footer-list-title">Kontakt</p>
+                            </li>
+
+                            <li class="footer-item">
+                                <div class="item-icon">
+                                    <ion-icon name="location-outline"></ion-icon>
+                                </div>
+
+                                <address class="item-text">
+                                    ul. Szarowiórza 65A/5<br>
+                                    31-442, Kraków
+                                </address>
+                            </li>
+
+                            <li class="footer-item">
+                                <div class="item-icon">
+                                    <ion-icon name="call-outline"></ion-icon>
+                                </div>
+
+                                <a href="tel:+48555155055" class="footer-link">+48 555 155 055</a>
+                            </li>
+
+                            <li class="footer-item">
+                                <div class="item-icon">
+                                    <ion-icon name="mail-outline"></ion-icon>
+                                </div>
+
+                                <a href="mailto:help@example.com" class="footer-link">kontakt@maxident.pl</a>
+                            </li>
+
+                        </ul>
+
+                    </div>
+                </div>
+
+                <div class="footer-bottom">
+                    <div class="container">
+
+                        <p class="copyright">
+                            &copy; 2023 Łukasz Oprych, Marcin Pigoń, Wiktoria Sędzik.
+                        </p>
+
+
+                    </div>
+                </div>
+
+                <a href="#top" class="back-top-btn" aria-label="back to top" data-back-top-btn>
+                    <ion-icon name="caret-up" aria-hidden="true"></ion-icon>
+                </a>
+            </footer>
+            <!--
+  - custom js link
+-->
+            <script src="{% static 'assets/js/script.js' %}" defer></script>
+
+            <!--
+  - ionicon link
+-->
+            <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+            <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>

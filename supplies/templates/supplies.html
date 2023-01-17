@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% block content %}
+
+{% for towar in Magazyn %}
+
+<h1>{{towar.name}}</h1>
+<h2>{{towar.current_capacity}} / {{towar.max_capacity}}</h2>
+
+{% endfor %}
+{% endblock %}

@@ -18,7 +18,7 @@ class WplywAdmin(ExportActionMixin, TotalsumAdmin):
     list_display = ('opis', 'uzytkownik', 'koszt', 'dzien_zamowienia')
     list_filter = ('uzytkownik','dzien_zamowienia',)
     date_hierarchy = 'dzien_zamowienia'
-    search_fields = ['opis', 'uzytkownik', 'dzien_zamowienia']
+    search_fields = ['opis', 'uzytkownik__first_name','uzytkownik__last_name', 'dzien_zamowienia']
     totalsum_list = ('koszt',)
     unit_of_measure = "zł"
 
